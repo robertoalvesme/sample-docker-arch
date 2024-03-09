@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+
+
+  api_service:
+    container_name: rhfactor
+    image: rhfactor/sample-docker-arch
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - springapimysql-net
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/basics?allowPublicKeyRetrieval=true
+    depends_on:
+      - mysqldb
+
+    volumes:
+      - .m2:/root/.m2
+
+  mysqldb:
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - springapimysql-net
+    environment:
+      MYSQL_DATABASE: basics
+      MYSQL_USER: test
+      MYSQL_PASSWORD: my-sql-database-pass
+      MYSQL_ROOT_PASSWORD: my-sql-database-root-pass
+networks:
+  springapimysql-net:
