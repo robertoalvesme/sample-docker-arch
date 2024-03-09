@@ -2,7 +2,9 @@
 #./gradlew build
 
 #Create a docker image
-docker build -t rhfactor/sample-docker-arch .
+#docker build -t rhfactor/sample-docker-arch .
 
 #Run image
-docker run -p 8080:8080 rhfactor/sample-docker-arch
+#docker run -p 8080:8080 rhfactor/sample-docker-arch
+
+docker-compose up
